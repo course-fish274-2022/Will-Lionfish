@@ -13,4 +13,7 @@ fish_data_cat <- fish_data %>%
 fish_data_cat_fixed <-  fish_data_cat %>% 
   filter(scalelength > 1)
 
-
+#Alternative way of doing it
+fish_data_cat <- fish_data %>%
+  mutate(length_cat = ifelse(length > 300, "big", "small")) %>% 
+  filter(scalelength > 1)
