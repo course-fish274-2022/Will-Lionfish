@@ -21,6 +21,7 @@ fish_data_cat <- fish_data %>%
 
 
 #Exercise 5
+#Create a scatterplot of length nd scale length, with dots colored by lake
 ggplot(data = fish_data_cat)+
   aes(x = length, y = scalelength, color = lakeid) +
   geom_point()
@@ -29,5 +30,4 @@ ggplot(data = fish_data_cat)+
 #Plot histogram of scale length by fish categorical size
 ggplot(fish_data_cat, aes(x = scalelength, fill = length_cat)) +
   geom_histogram()
-
 
