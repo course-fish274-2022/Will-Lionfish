@@ -13,8 +13,8 @@ library(tidyverse)
 surveys <- read.csv("data/REEF_AllSurveyData_FISH274.csv")
 
 #Filter data, group all data by the year of the survey
-surveys %>%
-  select(geogr, habitat, Survey_month, Survey_year, Abundance2) %>% 
-  group_by(year) %>% 
-  summarize(mean(Abundance2))
-  
+year_df <- surveys %>%
+  group_by(Survey_year) %>% 
+  summarize(yearly_avg_abundance = mean(Abundance2))
+
+#Map Changes in abundance by year            
