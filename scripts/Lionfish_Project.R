@@ -48,5 +48,7 @@ ggplot()+
   scale_x_log10()+
   labs(x = "Year", y= "Abundance", title= "Abundance Measures for Novice vs Expert Surveyors")
 
-
-
+surveys %>% 
+  ggplot(aes(x = abundance))+
+  geom_histogram()+
+  facet_wrap(~year)
