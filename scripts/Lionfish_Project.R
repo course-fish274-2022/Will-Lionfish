@@ -25,11 +25,12 @@ year_df %>%
   theme_bw()+
   scale_x_log10()+
   scale_y_log10()+
-  labs(title = "Yearly Abundance of Lionfish in the Flordia Keys", y = "Year", x = "Relative Abundance of Lionfish")+
+  labs(title = "Yearly Abundance of Lionfish in the Flordia Keys", x = "Year", 
+       y = "Relative Abundance of Lionfish")+
   geom_smooth(method = lm)
 
 
-#Create two data frames to stack them for expereince calculations
+#Create two data frames to stack them for experience calculations
 expN_df <- surveys %>%
   select(year, exp, abundance) %>% 
   filter(exp == "N") %>% 
@@ -53,27 +54,9 @@ surveys %>%
   geom_histogram()+
   facet_wrap(~year)
 
-#alldata <- surveys %>% 
- # group_by(year) %>% 
-  #count(abundance)
-
-alldata %>% 
-  ggplot(aes(x = year, y = n, fill = abundance))+
-  geom_bar(stat='identity')+
-  facet_wrap(~exp)
- 
 surveys %>% 
   group_by(year) %>%
-  summarize(n= count(abundance)) %>% 
-  ggplot(aes(x = year, color = abundance))+
-  geom_histogram() +
-  facet_wrap(~habitat)
-  
-
-temp <- surveys %>% 
-  group_by(year) %>%
-  group_by(habitat) %>% 
-  count(abundance)
-
-ggplot(data = temp)+
-  geom_histogram(y = abundance)
+  ggplot(aes(x = year, y = abundance))+
+  geom_histogram(stat = 'identity') +
+  facet_wrap(~habitat)+
+  labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
