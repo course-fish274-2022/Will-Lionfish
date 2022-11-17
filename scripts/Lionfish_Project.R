@@ -29,7 +29,7 @@ year_df %>%
   geom_smooth(method = lm)
 
 
-#Filter data, group all data by the year of the survey
+#Create two data frames to stack them for expereince calculations
 expN_df <- surveys %>%
   select(year, exp, abundance) %>% 
   filter(exp == "N") %>% 
@@ -52,3 +52,28 @@ surveys %>%
   ggplot(aes(x = abundance))+
   geom_histogram()+
   facet_wrap(~year)
+
+#alldata <- surveys %>% 
+ # group_by(year) %>% 
+  #count(abundance)
+
+alldata %>% 
+  ggplot(aes(x = year, y = n, fill = abundance))+
+  geom_bar(stat='identity')+
+  facet_wrap(~exp)
+ 
+surveys %>% 
+  group_by(year) %>%
+  summarize(n= count(abundance)) %>% 
+  ggplot(aes(x = year, color = abundance))+
+  geom_histogram() +
+  facet_wrap(~habitat)
+  
+
+temp <- surveys %>% 
+  group_by(year) %>%
+  group_by(habitat) %>% 
+  count(abundance)
+
+ggplot(data = temp)+
+  geom_histogram(y = abundance)
