@@ -30,7 +30,23 @@ year_df %>%
 
 
 #Filter data, group all data by the year of the survey
-exp_df <- surveys %>%
-  group_by(year, exp) %>%
-  filter(year >= "2009") %>% 
-  summarize(across(everything(), sum(abundance)), .groups = 'drop')
+expN_df <- surveys %>%
+  select(year, exp, abundance) %>% 
+  filter(exp == "N") %>% 
+  group_by(year) %>%
+  summarise(yearly_abd = mean(abundance))
+
+expE_df <- surveys %>%
+  select(year, exp, abundance) %>% 
+  filter(exp == "E")%>% 
+  group_by(year) %>%
+  summarise(yearly_abd = mean(abundance))
+
+ggplot()+
+  geom_point(data = expE_df, aes(x = year, y = yearly_abd), color = 'aquamarine3')+
+  geom_point(data = expN_df, aes(x = year, y = yearly_abd), color = 'deeppink')+
+  scale_x_log10()+
+  labs(x = "Year", y= "Abundance", title= "Abundance Measures for Novice vs Expert Surveyors")
+
+
+
