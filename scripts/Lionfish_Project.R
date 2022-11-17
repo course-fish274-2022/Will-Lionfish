@@ -28,3 +28,9 @@ year_df %>%
   labs(title = "Yearly Abundance of Lionfish in the Flordia Keys", y = "Year", x = "Relative Abundance of Lionfish")+
   geom_smooth(method = lm)
 
+
+#Filter data, group all data by the year of the survey
+exp_df <- surveys %>%
+  group_by(year, exp) %>%
+  filter(year >= "2009") %>% 
+  summarize(across(everything(), sum(abundance)), .groups = 'drop')
