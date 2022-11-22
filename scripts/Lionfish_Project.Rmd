@@ -11,7 +11,7 @@ library(tidyverse)
 
 ## Raw Data
 ```{r}
-surveys <- read.csv("data/REEF_AllSurveyData_FISH274.csv")
+surveys <- read.csv("../data/REEF_AllSurveyData_FISH274.csv")
 ```
 
 #Average Yearly Abundance of Lionfish
