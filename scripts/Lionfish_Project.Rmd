@@ -74,13 +74,23 @@ surveys %>%
 #Graph abundance based on habitat survey was conducted in
 ```{r, message=FALSE, warning = FALSE}
 
-habitat_names <- c("Mixed", "High-Profile Reef", "Low-Profile Reef", "Sloping Dropoff", "Wall", "Ledge", "Grass", "Sand", "Rubble", "Artificial", "Open Water")
+habitat_names <- c('1' = "Mixed", '2' = "High-Profile Reef", '3' = "Low-Profile Reef",
+                   '4' ="Sloping Dropoff", '5' ="Wall", '6' ="Ledge", '7' ="Grass", 
+                   '8' ="Sand", '9' = "Rubble", '10' = "Artificial", '11'= "Open Water")
 surveys %>% 
-  filter(habitat == 1:11) %>% 
   group_by(year) %>%
+  filter(habitat %in% 1:11) %>% 
+  mutate(habitat_type = habitat_names) %>% 
   ggplot(aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
   facet_wrap(~habitat)+  
-  labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")+
-  facet_grid(labeller = habitat_names)
+  labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
 ```
+
+#testing
+test <- surveys %>% 
+  group_by(year) %>%
+  filter(habitat %in% 1:11) %>% 
+  replace(habitat, habitat_types)
+  
+  
