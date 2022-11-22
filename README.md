@@ -25,4 +25,4 @@ summarize data before outputting graphs of the data
 
 3. scripts/fish-analysis.R -> this script is used as a trial project. The script uses ggplot2 and dplyr to clean and display data on fish lengths
 
-4. scripts/knitr_notes.R -> this script is the notes for the 11/22 lecture on the knitr package. 
+4. scripts/knitr_notes.Rmd -> this script is the notes for the 11/22 lecture on the knitr package. 
