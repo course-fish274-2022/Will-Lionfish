@@ -3,14 +3,13 @@ title: "Lionfish Project"
 output: html_document
 date: '2022-11-22'
 ---
-##Install and Load Packages
+Load Packages
 ```{r, message=FALSE}
-install.packages('tidyverse')
 library(tidyverse)
 ```
 
 ## Raw Data
-```{r}
+```{r, cache = TRUE}
 surveys <- read.csv("../data/REEF_AllSurveyData_FISH274.csv")
 ```
 
@@ -23,7 +22,7 @@ year_df <- surveys %>%
 ```
 
 #Graph Changes in abundance by year  
-```{r}
+```{r, message = FALSE}
 year_df %>% 
   ggplot(aes(x = year, y = yearly_avg_abundance))+
   geom_point()+ #scatterplot
@@ -64,7 +63,7 @@ ggplot()+
 
 
 #Graph all data based on the year
-```{r}
+```{r, message=FALSE}
 surveys %>% 
   ggplot(aes(x = abundance))+
   geom_histogram()+
@@ -73,11 +72,15 @@ surveys %>%
 ```
 
 #Graph abundance based on habitat survey was conducted in
-```{r}
+```{r, message=FALSE, warning = FALSE}
+
+habitat_names <- c("Mixed", "High-Profile Reef", "Low-Profile Reef", "Sloping Dropoff", "Wall", "Ledge", "Grass", "Sand", "Rubble", "Artificial", "Open Water")
 surveys %>% 
+  filter(habitat == 1:11) %>% 
   group_by(year) %>%
   ggplot(aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
   facet_wrap(~habitat)+  
-  labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
+  labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")+
+  facet_grid(labeller = habitat_names)
 ```
