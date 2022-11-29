@@ -1,28 +1,35 @@
 ---
-title: "Lionfish Project"
-output: html_document
-date: '2022-11-22'
+title: "Untitled"
+output: ioslides_presentation
+date: '2022-11-29'
 ---
-Load Packages
-```{r, message=FALSE}
+
+## Load Packages
+```{r, message = FALSE}
 library(ggplot2)
 library(dplyr)
 ```
 
-Raw Data
-```{r, cache = TRUE}
+## Raw Data
+```{r, cache = TRUE, echo=FALSE}
 surveys <- read.csv("../data/REEF_AllSurveyData_FISH274.csv")
+
+surveys %>% 
+  select(formid, exp, date, habitat, abundance, geogr) %>% 
+  head()
 ```
 
-Average Yearly Abundance of Lionfish
+## Average Yearly Abundance of Lionfish
 ```{r}
 year_df <- surveys %>%
   group_by(year) %>%
   filter(year >= "2009") %>% 
   summarize(yearly_avg_abundance = mean(abundance))
+
+head(year_df)
 ```
 
-Graph Changes in abundance by year  
+## Graph Changes in abundance by year  
 ```{r, message = FALSE}
 year_df %>% 
   ggplot(aes(x = year, y = yearly_avg_abundance))+
@@ -34,7 +41,7 @@ year_df %>%
   geom_smooth(method = lm) #insert linear model
 ```
 
-Create two data frames to stack them for experience calculations. All results of novice surveyors
+## Create two data frames to stack them for experience calculations. All results of novice surveyors
 ```{r}
 expN_df <- surveys %>%
   select(year, exp, abundance) %>% 
@@ -43,7 +50,7 @@ expN_df <- surveys %>%
   summarise(yearly_abd = mean(abundance))
 ```
 
-All results of expert surveyors
+## All results of expert surveyors
 ```{r}
 expE_df <- surveys %>%
   select(year, exp, abundance) %>% 
@@ -52,7 +59,7 @@ expE_df <- surveys %>%
   summarise(yearly_abd = mean(abundance))
 ```
 
-Graph expert vs novice using layers
+## Graph expert vs novice using layers
 ```{r}
 ggplot()+
   geom_point(data = expE_df, aes(x = year, y = yearly_abd), color = "aquamarine3", size = 3)+
@@ -63,27 +70,18 @@ ggplot()+
   
 ```
 
-Graph all data based on the year
-```{r, message=FALSE}
-surveys %>% 
-  ggplot(aes(x = abundance))+
-  geom_histogram()+
-  facet_wrap(~year)+ #makes it so each year has its own graph
-  labs(x = "n", y= "Abundance Levels", title= "Abundance Measures Based on Year")
-```
-
-Graph abundance based on habitat survey was conducted in
+## Graph abundance based on habitat survey was conducted in
 ```{r, message=FALSE, warning = FALSE}
-surveys %>% 
+test <- surveys %>% 
   group_by(year) %>%
   filter(habitat %in% 1:11) %>% 
   ggplot(aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
-  facet_wrap(~habitat)+  
+  facet_wrap(~HabitatType)+  
   labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
 ```
   
-Habitat Type Key
+## Habitat Type Key
 ```{r, echo = FALSE}
 habitat_names <- c("Mixed", "High-Profile Reef", "Low-Profile Reef",
                    "Sloping Dropoff","Wall","Ledge","Grass", "Sand", 
@@ -92,7 +90,7 @@ habitat_code <- c(1:11)
 
 df <- data.frame(first_column = habitat_code, second_column =habitat_names)
 
-knitr::kable(df, format = "html")
+knitr::kable(df, format = "html", align = rep('l', 5), col.names = 
+               c("Habitat Code", "Habitat Type"))
 
 ```
-
