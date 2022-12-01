@@ -1,8 +1,16 @@
 ---
-title: "Untitled"
+title: "Lionfish Abundance in the Florida Keys"
 output: ioslides_presentation
 date: '2022-11-29'
 ---
+
+## Questions
+The goal of this project is to examine changes in lionfish abundance across time based on the following parameters:
+
+-habitat type
+
+-surveyor experience level
+
 
 ## Load Packages
 ```{r, message = FALSE}
