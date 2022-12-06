@@ -82,10 +82,17 @@ ggplot()+
 ```{r, message=FALSE, warning = FALSE}
 test <- surveys %>% 
   group_by(year) %>%
-  filter(habitat %in% 1:11) %>% 
-  ggplot(aes(x = year, y = abundance))+
+  filter(habitat %in% 1:11) %>%
+  mutate(habitat_names = case_when(
+  habitat == 1  ~ "mixed",
+  habitat == 2  ~ "high-profile reef",
+  habitat == 3  ~ "low-profile  reef",
+  habitat == 4  ~ "sloping dropoff",))
+
+
+  ggplot(test, aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
-  facet_wrap(~HabitatType)+  
+  facet_wrap(~habitat_names)+  
   labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
 ```
   
