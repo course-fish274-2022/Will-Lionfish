@@ -11,12 +11,14 @@ The goal of this project is to examine changes in lionfish abundance across time
 
 -surveyor experience level
 
+![Lionfish](https://media.istockphoto.com/id/1149788257/photo/beautiful-swimming-lionfish-isolated-on-black-background.jpg?s=612x612&w=0&k=20&c=2bEH7bgSUmLQHfNogPpcJdK7-y2aAG9CppKtuWtL5KE=)
 
 ## Load Packages
 ```{r, message = FALSE}
 library(ggplot2)
 library(dplyr)
 ```
+These packages are used to manipulate raw data (dplyr) and generate graphs (ggplot2)
 
 ## Raw Data
 ```{r, cache = TRUE, echo=FALSE}
@@ -38,7 +40,7 @@ head(year_df)
 ```
 
 ## Graph Changes in abundance by year  
-```{r, message = FALSE}
+```{r, message = FALSE, echo = FALSE}
 year_df %>% 
   ggplot(aes(x = year, y = yearly_avg_abundance))+
   geom_point()+ #scatterplot
@@ -68,7 +70,7 @@ expE_df <- surveys %>%
 ```
 
 ## Graph expert vs novice using layers
-```{r}
+```{r, echo = FALSE}
 ggplot()+
   geom_point(data = expE_df, aes(x = year, y = yearly_abd), color = "aquamarine3", size = 3)+
   geom_point(data = expN_df, aes(x = year, y = yearly_abd), color = "deeppink", size = 3, alpha = 0.5)+
@@ -79,13 +81,13 @@ ggplot()+
 ```
 
 ## Graph abundance based on habitat survey was conducted in
-```{r, message=FALSE, warning = FALSE}
-test <- surveys %>% 
+```{r, message=FALSE, warning = FALSE, echo = FALSE}
+surveys %>% 
   group_by(year) %>%
   filter(habitat %in% 1:11) %>% 
   ggplot(aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
-  facet_wrap(~HabitatType)+  
+  facet_wrap(~habitat)+  
   labs(x = "Year", y= "Abundance", title= "Abundance Measures Based on Habitat")
 ```
   
