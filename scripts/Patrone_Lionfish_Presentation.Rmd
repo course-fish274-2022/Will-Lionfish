@@ -48,7 +48,7 @@ year_df %>%
   geom_point()+ #scatterplot
   theme_bw()+ #make background black and white
   scale_y_log10()+
-  labs(title = "Yearly Abundance of Lionfish in the Flordia Keys", x = "Year", 
+  labs(title = "Yearly Abundance of Lionfish in the Flordia Keys", x = "Year",
        y = "Relative Abundance of Lionfish")+
   geom_smooth(method = lm) #insert linear model
 ```
