@@ -5,13 +5,15 @@ date: '2022-11-29'
 ---
 
 ## Questions
-The goal of this project is to examine changes in lionfish abundance across time based on the following parameters:
+The goal of this project is to examine changes in lionfish abundance based on the following parameters:
+
+-year of survey
 
 -habitat type
 
 -surveyor experience level
 
-![Lionfish](https://media.istockphoto.com/id/1149788257/photo/beautiful-swimming-lionfish-isolated-on-black-background.jpg?s=612x612&w=0&k=20&c=2bEH7bgSUmLQHfNogPpcJdK7-y2aAG9CppKtuWtL5KE=)
+![Lionfish](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgd3bOFcwlW2f6DGKXmI-3dQaMiuaMl480g&usqp=CAU)
 
 ## Load Packages
 ```{r, message = FALSE}
@@ -35,7 +37,6 @@ year_df <- surveys %>%
   group_by(year) %>%
   filter(year >= "2009") %>% 
   summarize(yearly_avg_abundance = mean(abundance))
-
 head(year_df)
 ```
 
@@ -58,7 +59,6 @@ expN_df <- surveys %>%
   filter(exp == "N") %>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
-
 head(expN_df)
 ```
 
@@ -69,7 +69,6 @@ expE_df <- surveys %>%
   filter(exp == "E")%>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
-
 head(expE_df)
 ```
 
@@ -108,3 +107,13 @@ knitr::kable(df, format = "html", align = rep('l', 5), col.names =
                c("Habitat Code", "Habitat Type"))
 
 ```
+
+## Future Steps
+
+-Analysis by bottom time, month/seasonality, individual locations, etc.
+
+-Comparison of this citizen science data to other forms of data collection- which gives a better estimate?
+
+-Analysis of multiple surveyors diving the same spot at the same time: are there differences?
+
+-Statistical analysis to see if there is a difference between expert and novice observations

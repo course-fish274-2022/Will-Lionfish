@@ -3202,13 +3202,15 @@ slide:not(.current) .plotly.html-widget{
 
 <slide class=""><hgroup><h2>Questions</h2></hgroup><article  id="questions">
 
-<p>The goal of this project is to examine changes in lionfish abundance across time based on the following parameters:</p>
+<p>The goal of this project is to examine changes in lionfish abundance based on the following parameters:</p>
+
+<p>-year of survey</p>
 
 <p>-habitat type</p>
 
 <p>-surveyor experience level</p>
 
-<img src='https://media.istockphoto.com/id/1149788257/photo/beautiful-swimming-lionfish-isolated-on-black-background.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=2bEH7bgSUmLQHfNogPpcJdK7-y2aAG9CppKtuWtL5KE=' title='fig:'/><p class='caption'>Lionfish</p>
+<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgd3bOFcwlW2f6DGKXmI-3dQaMiuaMl480g&amp;usqp=CAU' title='fig:'/><p class='caption'>Lionfish</p>
 
 </article></slide><slide class=""><hgroup><h2>Load Packages</h2></hgroup><article  id="load-packages">
 
@@ -3233,7 +3235,6 @@ library(dplyr)</pre>
   group_by(year) %&gt;%
   filter(year &gt;= &quot;2009&quot;) %&gt;% 
   summarize(yearly_avg_abundance = mean(abundance))
-
 head(year_df)</pre>
 
 <pre >## # A tibble: 6 × 2
@@ -3257,7 +3258,6 @@ head(year_df)</pre>
   filter(exp == &quot;N&quot;) %&gt;% 
   group_by(year) %&gt;%
   summarise(yearly_abd = mean(abundance))
-
 head(expN_df)</pre>
 
 <pre >## # A tibble: 6 × 2
@@ -3277,7 +3277,6 @@ head(expN_df)</pre>
   filter(exp == &quot;E&quot;)%&gt;% 
   group_by(year) %&gt;%
   summarise(yearly_abd = mean(abundance))
-
 head(expE_df)</pre>
 
 <pre >## # A tibble: 6 × 2
@@ -3502,7 +3501,17 @@ Open Water
 
 </tbody>
 
-</table></article></slide>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Future Steps</h2></hgroup><article  id="future-steps">
+
+<p>-Analysis by bottom time, month/seasonality, individual locations, etc.</p>
+
+<p>-Comparison of this citizen science data to other forms of data collection- which gives a better estimate?</p>
+
+<p>-Analysis of multiple surveyors diving the same spot at the same time: are there differences?</p>
+
+<p>-Statistical analysis to see if there is a difference between expert and novice observations</p></article></slide>
 
 
   <slide class="backdrop"></slide>
