@@ -9,9 +9,9 @@ The goal of this project is to examine changes in lionfish abundance based on th
 
 -year of survey
 
--habitat type
-
 -surveyor experience level
+
+-habitat type
 
 ![Lionfish](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgd3bOFcwlW2f6DGKXmI-3dQaMiuaMl480g&usqp=CAU)
 
@@ -26,9 +26,10 @@ These packages are used to manipulate raw data (dplyr) and generate graphs (ggpl
 ```{r, cache = TRUE, echo=FALSE}
 surveys <- read.csv("../data/REEF_AllSurveyData_FISH274.csv")
 
-surveys %>% 
-  select(formid, exp, date, habitat, abundance, geogr) %>% 
-  head()
+display_surveys <- surveys %>% 
+  select(formid, exp, date, habitat, abundance, geogr)
+
+  knitr::kable(head(display_surveys))
 ```
 
 ## Average Yearly Abundance of Lionfish
@@ -37,7 +38,7 @@ year_df <- surveys %>%
   group_by(year) %>%
   filter(year >= "2009") %>% 
   summarize(yearly_avg_abundance = mean(abundance))
-head(year_df)
+ knitr::kable(head(year_df))
 ```
 
 ## Graph Changes in abundance by year  
@@ -59,7 +60,7 @@ expN_df <- surveys %>%
   filter(exp == "N") %>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
-head(expN_df)
+ knitr::kable(head(expN_df))
 ```
 
 ## All results of expert surveyors
@@ -69,7 +70,7 @@ expE_df <- surveys %>%
   filter(exp == "E")%>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
-head(expE_df)
+ knitr::kable(head(expE_df))
 ```
 
 ## Graph expert vs novice using layers

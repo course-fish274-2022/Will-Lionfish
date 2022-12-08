@@ -3206,9 +3206,9 @@ slide:not(.current) .plotly.html-widget{
 
 <p>-year of survey</p>
 
-<p>-habitat type</p>
-
 <p>-surveyor experience level</p>
+
+<p>-habitat type</p>
 
 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgd3bOFcwlW2f6DGKXmI-3dQaMiuaMl480g&amp;usqp=CAU' title='fig:'/><p class='caption'>Lionfish</p>
 
@@ -3221,13 +3221,64 @@ library(dplyr)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Raw Data</h2></hgroup><article  id="raw-data">
 
-<pre >##    formid exp      date habitat abundance    geogr
-## 1 5020322   E  1/2/2009      10         0 34080014
-## 2 5020472   E 1/11/2009      10         0 34080014
-## 3 5021079   E 2/14/2009       2         0 34080018
-## 4 5021088   E 2/15/2009       2         0 34080004
-## 5 5021307   E 2/22/2009      10         0 34080014
-## 6 5021375   E 2/28/2009       2         0 34080003</pre>
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="right">formid</th>
+<th align="left">exp</th>
+<th align="left">date</th>
+<th align="right">habitat</th>
+<th align="right">abundance</th>
+<th align="right">geogr</th>
+</tr>
+<tr class="odd">
+<td align="right">5020322</td>
+<td align="left">E</td>
+<td align="left">1/2/2009</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">34080014</td>
+</tr>
+<tr class="even">
+<td align="right">5020472</td>
+<td align="left">E</td>
+<td align="left">1/11/2009</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">34080014</td>
+</tr>
+<tr class="odd">
+<td align="right">5021079</td>
+<td align="left">E</td>
+<td align="left">2/14/2009</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">34080018</td>
+</tr>
+<tr class="even">
+<td align="right">5021088</td>
+<td align="left">E</td>
+<td align="left">2/15/2009</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">34080004</td>
+</tr>
+<tr class="odd">
+<td align="right">5021307</td>
+<td align="left">E</td>
+<td align="left">2/22/2009</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">34080014</td>
+</tr>
+<tr class="even">
+<td align="right">5021375</td>
+<td align="left">E</td>
+<td align="left">2/28/2009</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">34080003</td>
+</tr>
+</table>
 
 </article></slide><slide class=""><hgroup><h2>Average Yearly Abundance of Lionfish</h2></hgroup><article  id="average-yearly-abundance-of-lionfish">
 
@@ -3235,17 +3286,38 @@ library(dplyr)</pre>
   group_by(year) %&gt;%
   filter(year &gt;= &quot;2009&quot;) %&gt;% 
   summarize(yearly_avg_abundance = mean(abundance))
-head(year_df)</pre>
+ knitr::kable(head(year_df))</pre>
 
-<pre >## # A tibble: 6 × 2
-##    year yearly_avg_abundance
-##   &lt;int&gt;                &lt;dbl&gt;
-## 1  2009              0.00309
-## 2  2010              0.113  
-## 3  2011              0.202  
-## 4  2012              0.191  
-## 5  2013              0.232  
-## 6  2014              0.164</pre>
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">yearly_avg_abundance</th>
+</tr>
+<tr class="odd">
+<td align="right">2009</td>
+<td align="right">0.0030928</td>
+</tr>
+<tr class="even">
+<td align="right">2010</td>
+<td align="right">0.1132353</td>
+</tr>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="right">0.2019802</td>
+</tr>
+<tr class="even">
+<td align="right">2012</td>
+<td align="right">0.1913696</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">0.2319347</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">0.1644981</td>
+</tr>
+</table>
 
 </article></slide><slide class=""><hgroup><h2>Graph Changes in abundance by year</h2></hgroup><article  id="graph-changes-in-abundance-by-year">
 
@@ -3258,17 +3330,38 @@ head(year_df)</pre>
   filter(exp == &quot;N&quot;) %&gt;% 
   group_by(year) %&gt;%
   summarise(yearly_abd = mean(abundance))
-head(expN_df)</pre>
+ knitr::kable(head(expN_df))</pre>
 
-<pre >## # A tibble: 6 × 2
-##    year yearly_abd
-##   &lt;int&gt;      &lt;dbl&gt;
-## 1  2009    0.00177
-## 2  2010    0.103  
-## 3  2011    0.0664 
-## 4  2012    0.0766 
-## 5  2013    0.234  
-## 6  2014    0.126</pre>
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">yearly_abd</th>
+</tr>
+<tr class="odd">
+<td align="right">2009</td>
+<td align="right">0.0017730</td>
+</tr>
+<tr class="even">
+<td align="right">2010</td>
+<td align="right">0.1032258</td>
+</tr>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="right">0.0663507</td>
+</tr>
+<tr class="even">
+<td align="right">2012</td>
+<td align="right">0.0766129</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">0.2344932</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">0.1263318</td>
+</tr>
+</table>
 
 </article></slide><slide class=""><hgroup><h2>All results of expert surveyors</h2></hgroup><article  id="all-results-of-expert-surveyors">
 
@@ -3277,17 +3370,38 @@ head(expN_df)</pre>
   filter(exp == &quot;E&quot;)%&gt;% 
   group_by(year) %&gt;%
   summarise(yearly_abd = mean(abundance))
-head(expE_df)</pre>
+ knitr::kable(head(expE_df))</pre>
 
-<pre >## # A tibble: 6 × 2
-##    year yearly_abd
-##   &lt;int&gt;      &lt;dbl&gt;
-## 1  2009    0.00493
-## 2  2010    0.135  
-## 3  2011    0.299  
-## 4  2012    0.291  
-## 5  2013    0.223  
-## 6  2014    0.224</pre>
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">yearly_abd</th>
+</tr>
+<tr class="odd">
+<td align="right">2009</td>
+<td align="right">0.0049261</td>
+</tr>
+<tr class="even">
+<td align="right">2010</td>
+<td align="right">0.1348837</td>
+</tr>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="right">0.2993197</td>
+</tr>
+<tr class="even">
+<td align="right">2012</td>
+<td align="right">0.2912281</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">0.2233503</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">0.2243437</td>
+</tr>
+</table>
 
 </article></slide><slide class=""><hgroup><h2>Graph expert vs novice using layers</h2></hgroup><article  id="graph-expert-vs-novice-using-layers">
 
