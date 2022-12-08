@@ -51,13 +51,15 @@ year_df %>%
   geom_smooth(method = lm) #insert linear model
 ```
 
-## Create two data frames to stack them for experience calculations. All results of novice surveyors
+## All results of novice surveyors
 ```{r}
 expN_df <- surveys %>%
   select(year, exp, abundance) %>% 
   filter(exp == "N") %>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
+
+head(expN_df)
 ```
 
 ## All results of expert surveyors
@@ -67,6 +69,8 @@ expE_df <- surveys %>%
   filter(exp == "E")%>% 
   group_by(year) %>%
   summarise(yearly_abd = mean(abundance))
+
+head(expE_df)
 ```
 
 ## Graph expert vs novice using layers
@@ -84,7 +88,7 @@ ggplot()+
 ```{r, message=FALSE, warning = FALSE, echo = FALSE}
 surveys %>% 
   group_by(year) %>%
-  filter(habitat %in% 1:11) %>% 
+  filter(habitat %in% 1:11) %>%
   ggplot(aes(x = year, y = abundance))+
   geom_histogram(stat = 'identity') +
   facet_wrap(~habitat)+  
